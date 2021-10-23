@@ -10,17 +10,19 @@ class cCharacters
 {
 private:
     /* data */
+
+protected:
+    int nHP = 100;
+    /// unique pointer should work well as there shouldn't be any shared ownership involved here
+    std::unique_ptr<IWeapons> weapon;
     
 public:
     cCharacters(/* args */){};
     ~cCharacters(){};
 
-    int nHP = 100;
-    IWeapons* weapon;
-
     void equipWeapon(IWeapons* newWeapon)
     {
-        weapon = newWeapon;
+        weapon.reset(newWeapon);
     }
 
     virtual void performAttack()
